@@ -1,0 +1,5 @@
+sudo yum install awslogs
+cat /etc/awslogs/awscli.conf 
+cat /etc/awslogs/awslogs.conf
+sudo service awslogsd start 
+sudo systemctl  enable awslogsd
