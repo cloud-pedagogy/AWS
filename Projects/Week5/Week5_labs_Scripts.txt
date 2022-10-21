@@ -1,0 +1,36 @@
+/******5_3_Cloud9 Environment with CodeCommit and CodeBuild**************/
+Task 1: 
+git config --global user.name "<REPLACE_WITH_YOUR_NAME>"
+git config --global user.email <REPLACE_WITH_YOUR_EMAIL>
+cd ~/environment/trivia-app/ 
+git init 
+git checkout -b main 
+git add . 
+git commit -m "initial commit" 
+git remote add origin codecommit://trivia-app 
+git push origin main	
+
+Task 2:
+git add *
+git commit -m "adding a unittests buildspec"
+git push origin main
+
+/************5_4_Cloud9_Testing the Application***************/
+Task 1: 
+cd ~/environment/trivia-app
+pip3 install -U -r back-end-python/gameactions/requirements.txt
+pip3 install -U -r back-end-python/tests/requirements.txt
+./local_build.sh
+
+Task 2: 
+AWS_SAM_STACK_NAME=trivia-app pytest -s back-end-python/tests/integration/test_api_gateway.py
+
+
+/************5_4_Cloud9_Testing the Application************/
+Task 1:
+pip3 install -U -r back-end-python/gameactions/requirements.txt
+pip3 install -U -r back-end-python/tests/requirements.txt
+./local_build.sh
+
+Task 2:
+AWS_SAM_STACK_NAME=trivia-app pytest -s back-end-python/tests/integration/test_api_gateway.py
