@@ -1,0 +1,44 @@
+/***********Lab4_1************************/
+
+sudo yum install awslogs
+cat /etc/awslogs/awscli.conf 
+cat /etc/awslogs/awslogs.conf
+sudo service awslogsd start 
+sudo systemctl  enable awslogsd
+
+/***********Lab4_2************************/
+Task1:
+wget https://aws-tc-largeobjects.s3.us-west-2.amazonaws.com/DEV-AWS-MO-DevOps-C1/downloads/trivia-app.zip -O ~/trivia-app.zip
+unzip -o ~/trivia-app.zip
+
+Task2:
+cd trivia-app
+sam build
+sam deploy --guided
+
+Task3:
+nvm install lts/gallium
+nvm alias default lts/gallium
+cd front-end-react/
+npm install
+npm run start
+
+Task4
+aws s3 mb s3://<your_initials><numbers>-trivia-app-bucket/
+npm run build
+aws s3 sync --acl public-read build s3://<your_initials><numbers>-trivia-app-bucket/
+https://<your_initials><numbers>-trivia-app-bucket.s3.amazonaws.com/index.html
+
+/***********Lab4_3************************/
+Stage 2
+wget https://github.com/nakkalamitte-bharathi/AWS/blob/master/Projects/FlaskApp.zip
+unzip FlaskApp.zip
+cd FlaskApp/
+yum -y install python3 mysql
+pip3 install -r requirements.txt
+amazon-linux-extras install epel
+yum -y install stress
+export PHOTOS_BUCKET=${SUB_PHOTOS_BUCKET}
+export AWS_DEFAULT_REGION=<INSERT REGION HERE>
+export DYNAMO_MODE=on
+FLASK_APP=application.py /usr/local/bin/flask run --host=0.0.0.0 --port=80
