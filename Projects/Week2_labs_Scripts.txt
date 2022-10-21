@@ -1,0 +1,58 @@
+/**********2_2_Launch simple python flask web application in EC2 instance****************/
+#!/bin/bash -ex
+sudo yum update -y
+sudo pip3 install flask
+sudo pip3 install requests
+mkdir PythonWebApp
+cd PythonWebApp
+sudo cat >> flaskApp.py << EOF
+from flask import Flask
+import requests
+app = Flask(__name__)
+@app.route("/")
+def main():
+  r = requests.get('http://169.254.169.254/latest/dynamic/instance-identity/document')
+  text = "Welcome! Here is some info about me!\n\n" + r.text
+  return text
+
+
+if __name__ == "__main__":
+  app.run(host='0.0.0.0', port=80)
+EOF
+sudo python3 flaskApp.py
+
+/************2_3_Compute**************************/
+wget https://github.com/nakkalamitte-bharathi/AWS/blob/master/Projects/FlaskApp.zip
+unzip FlaskApp.zip
+cd FlaskApp/
+yum -y install python3 mysql
+pip3 install -r requirements.txt
+amazon-linux-extras install epel
+yum -y install stress
+export PHOTOS_BUCKET=${SUB_PHOTOS_BUCKET}
+export AWS_DEFAULT_REGION=<INSERT REGION HERE>
+export DYNAMO_MODE=on
+FLASK_APP=application.py /usr/local/bin/flask run --host=0.0.0.0 --port=80
+
+/****************2_8_Launching an EKS Cluster in CLI**************************/
+Task2 : 
+15. aws --version
+16. curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+17. unzip awscliv2.zip
+19. sudo ./aws/install --bin-dir /usr/bin --install-dir /usr/bin/aws-cli --update
+26. curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl
+27. chmod +x ./kubectl
+28. mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+
+Task 3:
+1.eksctl create cluster --name dev --version 1.21 --region us-east-1 --zones us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1f --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 1 --nodes-max 4 --managed
+ OR
+eksctl create cluster --name dev --version 1.21 --region us-east-1 --zones us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1f --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 1 --nodes-max 4 --managed
+
+Task4:
+2. https://github.com/nakkalamitte-bharathi/AWS/blob/master/Compute/EKS/nginx-deployment.yaml
+   https://github.com/nakkalamitte-bharathi/AWS/blob/master/Compute/EKS/nginx-svc.yaml
+6. kubectl apply -f ./nginx-svc.yaml
+8. kubectl apply -f ./nginx-deployment.yaml
+9. kubectl get deployment
+   
