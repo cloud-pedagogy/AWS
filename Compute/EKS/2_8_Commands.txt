@@ -1,0 +1,23 @@
+Task2 : 
+
+15. aws --version
+16. curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+17. unzip awscliv2.zip
+19. sudo ./aws/install --bin-dir /usr/bin --install-dir /usr/bin/aws-cli --update
+26. curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl
+27. chmod +x ./kubectl
+28. mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+
+Task 3
+
+1.eksctl create cluster --name dev --version 1.21 --region us-east-1 --zones us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1f --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 1 --nodes-max 4 --managed
+ OR
+eksctl create cluster --name dev --version 1.21 --region us-east-1 --zones us-east-1a,us-east-1b,us-east-1c,us-east-1d,us-east-1f --nodegroup-name standard-workers --node-type t3.micro --nodes 3 --nodes-min 1 --nodes-max 4 --managed
+
+Task 4
+
+2. git clone https://github.com/nakkalamitte-bharathi/AWS_EKS
+6. kubectl apply -f ./nginx-svc.yaml
+8. kubectl apply -f ./nginx-deployment.yaml
+9. kubectl get deployment
+
