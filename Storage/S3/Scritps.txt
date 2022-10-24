@@ -1,7 +1,23 @@
 
 
-/*************4_Setting Up an S3 Static Website Using AWS CLI*******************/
+/*************2_Setting Up an S3 Static Website Using AWS CLI*******************/
 cd aws s3api put-bucket-policy --bucket <UNIQUE_BUCKET_NAME> --policy file://policy_s3.json
 echo "<html><center><h1>My Static Website on S3</h1></center></html>" > index.html
 aws s3 cp index.html s3://<UNIQUE_BUCKET_NAME>
 curl http://<UNIQUE_BUCKET_NAME>.s3-website.us-east-1.amazonaws.com
+
+/**************4_Setting Up AWS CloudFront as an HTTPS Endpoint for S3********/
+aws s3api create-bucket --bucket <BUCKET_NAME> --acl public-read
+aws s3 cp index.html s3://test-123-best123
+aws cloudfront create-cloud-front-origin-access-identity --cloud- front-origin-access-identity-config CallerReference= <YOUR_UNIQUE_STRING_HERE>,Comment=MyOAI
+echo "Id: <OAI_Id>" > OAI.txt
+vim policy_cloudfront.json
+aws s3api put-bucket-policy --bucket <BUCKET_NAME> --policy file://policy_cloudfront.json
+aws cloudfront create-distribution --origin-domain-name <BUCKET_NAME>.s3.amazonaws.com --default-root-object index.html
+echo "CF Id: <Id>" >> cf_details.txt
+echo "CF Etag: <ETag>" >> cf_details.txt
+cat cf_details.txt
+aws cloudfront get-distribution-config --id <CF_DIST_ID> | jq -r .DistributionConfig > dist-config.json
+vim dist-config.json
+aws cloudfront update-distribution --id <DISTRIBUTION_ID> --distribution-config file://dist-config.json --if-match <DISTRIBUTION_ETAG>
+
