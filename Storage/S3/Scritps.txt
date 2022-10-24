@@ -1,0 +1,7 @@
+
+
+/*************4_Setting Up an S3 Static Website Using AWS CLI*******************/
+cd aws s3api put-bucket-policy --bucket <UNIQUE_BUCKET_NAME> --policy file://policy_s3.json
+echo "<html><center><h1>My Static Website on S3</h1></center></html>" > index.html
+aws s3 cp index.html s3://<UNIQUE_BUCKET_NAME>
+curl http://<UNIQUE_BUCKET_NAME>.s3-website.us-east-1.amazonaws.com
