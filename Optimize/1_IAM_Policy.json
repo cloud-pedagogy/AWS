@@ -1,0 +1,35 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "rds:*",
+                "ssm:*",
+                "kms:*",
+                "apigateway:*",
+                "lambda:*",
+                "sns:*",
+                "application-autoscaling:*",
+                "s3:*",
+                "logs:*",
+                "cloudformation:*",
+                "dynamodb:*",
+                "cloud9:*",
+                "elasticloadbalancing:*",
+                "autoscaling:*",
+                "iam:*",
+                "cloudfront:*",
+                "cloudwatch:*",
+                "ecs:*",
+                "ecr:*",
+                "pricing:*",
+                "ec2:*",
+                "config:*",
+                "elasticache:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
