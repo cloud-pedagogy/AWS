@@ -1,0 +1,17 @@
+/**************1_Containerize A Sample Application With Docker Containers********************/
+Step 4. 
+cd ~/environment
+wget https://github.com/nakkalamitte-bharathi/AWS/raw/master/Optimize/ex-ecs.zip -O ~/ex-ecs.zip
+unzip -o ~/ex-ecs.zip
+Step 5
+cd ex-ecs/ApplicationServer/
+docker build -t timezones-appserver .
+docker images
+docker run -it -p 8081:8081 timezones-appserver
+docker ps 
+curl http://REPLACE_WITH_PRIVATE_IP:8081/api/v1.0/get_zones
+cd ~/environment/ex-ecs/FrontEnd 
+docker build -t timezones-frontend . 
+docker run -it -e APP_SERVER=http://REPLACE_WITH_PRIVATE_IP:8081 -p 8080:8080 timezones-frontend 
+
+
