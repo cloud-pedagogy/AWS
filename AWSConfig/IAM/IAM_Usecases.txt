@@ -40,3 +40,9 @@
     }
   ]
 }
+
+/********PrivilegedRole*********/
+[profile PrivilegedRole]
+role_arn = REPLACE_WITH_ALLOW_BUCKET_DELETION_ROLE_ARN
+source_profile = default
+
