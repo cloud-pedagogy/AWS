@@ -1,3 +1,5 @@
+/****************Exercise 1: Deploy an Application with Amazon Lightsail***************/
+
 cd /opt/bitnami/apache2/htdocs
 rm -rf *
 sudo git clone https://github.com/nakkalamitte-bharathi/AWS/raw/master/Projects/AWSlightsailPHP/petadoptionphp.zip
@@ -5,3 +7,47 @@ sudo mkdir /opt/bitnami/apache2/configs && \
 sudo chown bitnami:bitnami /opt/bitnami/apache2/configs
 sudo mv /opt/bitnami/apache2/htdocs/config.php /opt/bitnami/apache2/configs/config.php
 cat /home/bitnami/htdocs/data/init.sql | /opt/bitnami/mariadb/bin/mysql -u root -p$(cat /home/bitnami/bitnami_application_password)
+
+/*******************Exercise 2: Create a Database and Object Storage in Amazon Lightsail***********/
+CREATE DATABASE pets;
+
+SHOW DATABASES;
+
+USE pets;
+
+CREATE TABLE pet (
+ id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(30) NOT NULL,
+ type VARCHAR(15) NOT NULL,
+ age VARCHAR(5) NOT NULL,
+ breed VARCHAR(30) NOT NULL,
+ photoLocation VARCHAR(250) NOT NULL,
+ size VARCHAR(10) NOT NULL,
+ description VARCHAR(250) NOT NULL,
+ status VARCHAR(10)
+ );
+ 
+ CREATE TABLE application (
+ id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(30) NOT NULL,
+ email VARCHAR(250) NOT NULL,
+ phone VARCHAR(20) NOT NULL,
+ address VARCHAR(250) NOT NULL,
+ animal VARCHAR(30) NOT NULL,
+ currentPets VARCHAR(5) NOT NULL,
+ currentPetDetails VARCHAR(250),
+ comments VARCHAR(250)
+);
+
+SHOW TABLES;
+
+INSERT INTO pet (name, type, age, breed, photoLocation, size, description, status)
+VALUES ('Tomcat', 'cat', '3', 'fuzzy cat', 'cat.jpeg' , 'small', 'very nice cat', 'available');
+INSERT INTO pet (name, type, age, breed, photoLocation, size, description, status)
+VALUES ('XXX', 'XXX', 'XXX', 'XXX', 'cat2.jpeg', 'XXX', 'XXX', 'XXX');
+INSERT INTO pet (name, type, age, breed, photoLocation, size, description, status)
+VALUES ('Baxter', 'dog', '12', 'miniature schnauzer', 'dog.jpeg', 'small', 'very nice dog', 'available');
+INSERT INTO pet (name, type, age, breed, photoLocation, size, description, status)
+VALUES ('XXX', 'XXX', 'XXX', 'XXX', 'dog2.jpeg', 'XXX', 'XXX', 'XXX');
+
+SELECT * FROM pet;
