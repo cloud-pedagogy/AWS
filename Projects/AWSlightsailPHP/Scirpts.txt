@@ -2,7 +2,7 @@
 
 cd /opt/bitnami/apache2/htdocs
 rm -rf *
-sudo git clone https://github.com/nakkalamitte-bharathi/AWS/raw/master/Projects/AWSlightsailPHP/petadoptionphp.zip
+sudo git clone https://github.com/morganwillisaws/petadoptionphp.git .
 sudo mkdir /opt/bitnami/apache2/configs && \
 sudo chown bitnami:bitnami /opt/bitnami/apache2/configs
 sudo mv /opt/bitnami/apache2/htdocs/config.php /opt/bitnami/apache2/configs/config.php
