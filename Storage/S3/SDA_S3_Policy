@@ -1,0 +1,19 @@
+/***s3 policy ********/
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AllowS3ReadAccess",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "<IAM-ROLE_ARN>"
+			},
+			"Action": "s3:*",
+			"Resource": [
+				"<BUCKET-ARN>",
+				"<BUCKET-ARN>/*"
+			]
+		}
+	]
+}
+
